@@ -10,6 +10,7 @@ const CreateRule = () => {
     e.preventDefault();
     try {
       const result = await createRule(ruleString);
+      console.log(result);
       setResponse(result);
       setError(null);
     } catch (error) {
@@ -21,7 +22,7 @@ const CreateRule = () => {
   return (
     <div className="flex flex-col space-y-6 max-w-lg mx-auto p-8 bg-white rounded-lg shadow-lg">
       <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">Create Rule</h2>
-      
+
       <form onSubmit={handleCreateRule} className="flex flex-col space-y-4">
         <div className="flex flex-col">
           <label className="mb-2 text-lg font-semibold text-gray-700">Rule String</label>
@@ -43,8 +44,12 @@ const CreateRule = () => {
 
       {response && (
         <div className='bg-green-100 text-green-800 p-4 rounded-md font-semibold border border-green-200 mt-4'>
-          <strong>Response:</strong> 
-          <pre className='whitespace-pre-wrap break-words'>{JSON.stringify(response, null, 2)}</pre>
+       
+          {response.ruleString ? (
+            <div>Rule created successfully</div>
+          ) : (
+            <div>Rule not created</div>
+          )}
         </div>
       )}
 

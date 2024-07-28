@@ -10,6 +10,7 @@ const ModifyRule = () => {
   const handleModifyRule = async () => {
     try {
       const result = await modifyRule(ruleId, newRuleString);
+      console.log(result);
       setResponse(result);
       setError(null);
     } catch (error) {
@@ -52,7 +53,12 @@ const ModifyRule = () => {
 
       {response && (
         <pre className='bg-orange-100 text-orange-800 p-4 rounded-md mt-6 border border-orange-200'>
-          <strong>Response:</strong> {JSON.stringify(response, null, 2)}
+         {response.ruleString ? (
+            <div>Rules modify successfully!</div>
+          ) : (
+            <div>Rule not modified</div>
+          )}
+        
         </pre>
       )}
       {error && (

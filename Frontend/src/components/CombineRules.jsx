@@ -7,7 +7,7 @@ const CombineRules = () => {
   const [error, setError] = useState(null);
 
   const handleCombineRules = async (event) => {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault(); 
     try {
       const rulesArray = ruleStrings.split('\n').filter((rule) => rule.trim() !== '');
       console.log('Rules to combine:', rulesArray); // Log rulesArray before sending to API
@@ -49,8 +49,12 @@ const CombineRules = () => {
 
       {response && (
         <div className='bg-green-100 text-green-800 p-4 rounded-md font-semibold border border-green-200 mt-4'>
-          <strong>Response:</strong>
-          <pre className='whitespace-pre-wrap break-words'>{JSON.stringify(response, null, 2)}</pre>
+         
+          {response.combinedAST ? (
+            <div>Rules combined successfully</div>
+          ) : (
+            <div>Rules not combined</div>
+          )}
         </div>
       )}
 

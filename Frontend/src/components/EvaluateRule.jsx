@@ -16,6 +16,7 @@ const EvaluateRule = () => {
     const getRuleIds = async () => {
       try {
         const response = await fetch('http://localhost:3000/api/rules/all');
+        console.log(response);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -53,6 +54,8 @@ const EvaluateRule = () => {
       setResponse(null);
     }
   };
+
+
 
   return (
     <div className="flex flex-col space-y-4 max-w-lg mx-auto p-4 bg-white rounded-lg shadow-md">
@@ -127,9 +130,18 @@ const EvaluateRule = () => {
 
       {response && (
         <pre className='bg-green-100 text-green-800 p-4 rounded-md font-semibold border border-green-200 mt-4'>
-          <strong>Response:</strong> {JSON.stringify(response, null, 2)}
+        <div>
+      {response.result === true ? (
+        <div>You are Eligible</div>
+      ) : (
+        <div>You are not eligible</div>
+      )}
+    </div>
+
         </pre>
       )}
+    
+
 
       {error && <div className="text-red-500 mt-4 text-center text-lg">Error: {error}</div>}
     </div>
